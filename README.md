@@ -86,37 +86,37 @@ The server will start at http://localhost:5000.
 API Endpoints
 Authentication
 Endpoint	Method	Description
-/api/auth/register	POST	Register a user
-/api/auth/login	POST	Login and get a token
+/Admin/register	POST	Register a user
+/Admin/login	POST	Login and get a token
 Admin
 Endpoint	Method	Description
-/api/admin/users	GET	Get all users (Admin only)
+/admin/users	GET	Get all users (Admin only)
 Students
 Endpoint	Method	Description
-/api/students	GET	Get all students
-/api/students	POST	Add a student
-/api/students/:id	GET	Get student by ID
-/api/students/:id	PUT	Update student details
-/api/students/:id	DELETE	Delete a student
+/students	GET	Get all students
+/students	POST	Add a student
+/students/:id	GET	Get student by ID
+/students/:id	PUT	Update student details
+/students/:id	DELETE	Delete a student
 Teachers
 Endpoint	Method	Description
-/api/teachers	GET	Get all teachers
-/api/teachers	POST	Add a teacher
-/api/teachers/:id	GET	Get teacher by ID
-/api/teachers/:id	PUT	Update teacher details
-/api/teachers/:id	DELETE	Delete a teacher
+/teachers	GET	Get all teachers
+/teachers	POST	Add a teacher
+/teachers/:id	GET	Get teacher by ID
+/teachers/:id	PUT	Update teacher details
+/teachers/:id	DELETE	Delete a teacher
 Classes
 Endpoint	Method	Description
-/api/classes	GET	Get all classes
-/api/classes	POST	Add a class
-/api/classes/:id	GET	Get class by ID
-/api/classes/:id	PUT	Update class details
-/api/classes/:id	DELETE	Delete a class
+/classes	GET	Get all classes
+/classes	POST	Add a class
+/classes/:id	GET	Get class by ID
+/classes/:id	PUT	Update class details
+/classes/:id	DELETE	Delete a class
 Testing APIs with Postman
 Register or Login
 
-Use the /api/Admin/register endpoint to register a user.
-Use the /api/Admin/login endpoint to log in and get a token.
+Use the /Admin/register endpoint to register a user.
+Use the /Admin/login endpoint to log in and get a token.
 Add Authorization Header
 
 After login, copy the JWT token.

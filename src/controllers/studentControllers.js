@@ -1,4 +1,4 @@
-const Student = require('../models/student');
+const Student = require('../models/Student');
 const { ErrorHandler } = require('../utils/errorHandler');
 exports.addStudent = async (req, res) => {
     try {
