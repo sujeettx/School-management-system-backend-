@@ -1,13 +1,14 @@
 {
   "name": "school-management-system",
   "version": "1.0.0",
-  "description": "school mangement system using node.js express.js and mongoDB",
-  "main": "server.js",
+  "description": "School management system using Node.js, Express.js, and MongoDB",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "sujeet kushwaha",
+  "author": "Sujeet Kushwaha",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
