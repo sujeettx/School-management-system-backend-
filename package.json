@@ -4,7 +4,7 @@
   "description": "School management system using Node.js, Express.js, and MongoDB",
   "main": "src/server.js",
   "scripts": {
-    "start": "node src/server.js",
+    "start": "npx nodemon src/server.js",
     "dev": "node src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

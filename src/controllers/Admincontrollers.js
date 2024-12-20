@@ -65,4 +65,17 @@ const loginUser = async (req, res) => {
     }
 };
 
-module.exports = { registerUser, loginUser };
+
+// Get all Admins
+
+const getAdmins = async (req, res) => {
+    try {
+        const admins = await User.find({ role: 'admin' });
+        res.json(admins);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+module.exports = { registerUser, loginUser ,getAdmins};

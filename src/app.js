@@ -29,9 +29,9 @@ app.use((err, req, res, next) => {
 connectDb();
 
 // Routes
-app.use('/students', studentRoutes);
-app.use('/teachers', teacherRoutes);
-app.use('/classes', classRoutes);
+app.use('/Students', studentRoutes);
+app.use('/Teachers', teacherRoutes);
+app.use('/Classes', classRoutes);
 app.use('/Admins',AdminRoutes);
 
 // Base Route
