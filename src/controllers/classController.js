@@ -19,7 +19,9 @@ exports.createClass = async (req, res) => {
 
 exports.getAllClasses = async (req, res) => {
   try {
-    const classes = await Class.find(req.query).populate("teacherId students");
+    const classes = await Class.find(req.query)
+      .populate("teacherId", "name _id")  // Populate teacherId with only name and _id
+      .populate("students", "name _id");  // Populate students with only name and _id
     res.status(200).json(classes);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -28,9 +30,10 @@ exports.getAllClasses = async (req, res) => {
 
 exports.getClassById = async (req, res) => {
   try {
-    const singleClass = await Class.findById(req.params.id).populate(
-      "teacherId students"
-    );
+    const singleClass = await Class.findById(req.params.id)
+      .populate("teacherId", "name _id")  // Populate teacherId with only name and _id
+      .populate("students", "name _id");  // Populate students with only name and _id
+    
     if (!singleClass) return res.status(404).json({ error: "Class not found" });
     res.status(200).json(singleClass);
   } catch (error) {
@@ -44,7 +47,10 @@ exports.updateClass = async (req, res) => {
       req.params.id,
       req.body,
       { new: true }
-    ).populate("teacherId students");
+    )
+      .populate("teacherId", "name _id")  // Populate teacherId with only name and _id
+      .populate("students", "name _id");  // Populate students with only name and _id
+    
     if (!updatedClass)
       return res.status(404).json({ error: "Class not found" });
     res.status(200).json(updatedClass);

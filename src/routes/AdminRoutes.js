@@ -10,6 +10,6 @@ router.post('/register', registerUser);
 router.post('/login', loginUser);
 
 // Route for getting all admins
-router.get('/',AdminMiddleware, getAdmins);
+router.get('/',getAdmins);
 
 module.exports = router;
