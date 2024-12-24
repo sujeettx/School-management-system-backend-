@@ -1,133 +1,249 @@
-School Management System
-This is a backend application for managing a school system, including students, teachers, classes, and administrators. It is built using Node.js, Express.js, and MongoDB. The app provides APIs to handle CRUD operations for teachers, students, and classes while ensuring secure access with JWT-based authentication.
+# School Management System
 
-Features
-User Roles: Admin and regular users (students/teachers).
-JWT Authentication: Secured routes with role-based access.
-CRUD Operations: Create, Read, Update, and Delete functionality for:
-Teachers
-Students
-Classes
-Database Relationships:
-Classes are linked to Teachers.
-Students are associated with Classes.
-Validation: Ensures proper input through schema-defined fields.
-Folder Structure
-csharp
-Copy code
-school-management-system/
-├── config/
-│   └── db.js                   # MongoDB connection setup
-├── controllers/
-│   ├── adminController.js      # Admin-related logic
-│   ├── authController.js       # Authentication logic
-│   ├── classController.js      # Class-related CRUD operations
-│   ├── studentController.js    # Student-related CRUD operations
-│   └── teacherController.js    # Teacher-related CRUD operations
-├── middlewares/
-│   ├── authMiddleware.js       # Authentication and authorization
-│   ├── errorMiddleware.js      # Global error handling
-├── models/
-│   ├── Admin.js                # Admin schema
-│   ├── Class.js                # Class schema
-│   ├── Student.js              # Student schema
-│   └── Teacher.js              # Teacher schema
-├── routes/
-│   ├── adminRoutes.js          # Admin routes
-│   ├── authRoutes.js           # Authentication routes
-│   ├── classRoutes.js          # Class routes
-│   ├── studentRoutes.js        # Student routes
-│   └── teacherRoutes.js        # Teacher routes
-├── utils/
-│   └── errorHandler.js         # Custom error handler
-├── app.js                      # Main server file
-├── .env                        # Environment variables
-├── package.json                # Project dependencies
-└── README.md                   # Project documentation
-Dependencies
-Here are the dependencies used in the project:
+A robust backend application for managing school data, built with Node.js, Express.js, and MongoDB. Features JWT authentication and CRUD operations for students, teachers, and classes.
 
-Package	Purpose
-express	Backend framework for building APIs
-mongoose	MongoDB ODM for schema definition and queries
-dotenv	Manage environment variables
-jsonwebtoken	JWT-based authentication
-bcryptjs	Password hashing
-body-parser	Parse incoming request bodies
-cors	Enable CORS for API calls
-nodemon	Development tool to auto-restart the server
-Environment Variables
-Create a .env file in the root directory and add the following:
+## Features
 
-makefile
-Copy code
+- User Roles: Admin and regular users (students/teachers)
+- JWT Authentication with role-based access
+- CRUD Operations for teachers, students, and classes
+- Database Relationships: Classes linked to Teachers, Students associated with Classes
+- Input Validation through schema-defined fields
+
+## Installation & Setup
+
+1. Clone the repository:
+```bash
+git clone https://github.com/your-repository-url/school-management-system.git
+cd school-management-system
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Configure environment variables:
+Create a `.env` file with:
+```
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/schoolDB
 JWT_SECRET=your_secret_key
-Setup Instructions
-1. Clone the Repository
-bash
-Copy code
-git clone https://github.com/your-repository-url/school-management-system.git
-cd school-management-system
-2. Install Dependencies
-bash
-Copy code
-npm install
-3. Configure Environment Variables
-Create a .env file in the root directory.
-Add the environment variables as mentioned above.
-4. Start the Server
-bash
-Copy code
+```
+
+4. Start the server:
+```bash
 npm start
-The server will start at http://localhost:5000.
+```
 
-API Endpoints
-Authentication
-Endpoint	Method	Description
-/Admin/register	POST	Register a user
-/Admin/login	POST	Login and get a token
-Admin
-Endpoint	Method	Description
-/admin/users	GET	Get all users (Admin only)
-Students
-Endpoint	Method	Description
-/students	GET	Get all students
-/students	POST	Add a student
-/students/:id	GET	Get student by ID
-/students/:id	PUT	Update student details
-/students/:id	DELETE	Delete a student
-Teachers
-Endpoint	Method	Description
-/teachers	GET	Get all teachers
-/teachers	POST	Add a teacher
-/teachers/:id	GET	Get teacher by ID
-/teachers/:id	PUT	Update teacher details
-/teachers/:id	DELETE	Delete a teacher
-Classes
-Endpoint	Method	Description
-/classes	GET	Get all classes
-/classes	POST	Add a class
-/classes/:id	GET	Get class by ID
-/classes/:id	PUT	Update class details
-/classes/:id	DELETE	Delete a class
-Testing APIs with Postman
-Register or Login
+## API Documentation
 
-Use the /Admin/register endpoint to register a user.
-Use the /Admin/login endpoint to log in and get a token.
-Add Authorization Header
+### Authentication
 
-After login, copy the JWT token.
-Add the token to the Authorization header of every subsequent request as Bearer <token>.
-Access APIs
+#### Register Admin
+```
+POST /admin/register
+Content-Type: application/json
 
-Test the APIs using the provided routes, passing the required payloads.
-Additional Enhancements (Future Scope)
-Upload Images: Integrate file/image uploads (e.g., with Cloudinary).
-Frontend: Develop a React.js or Angular-based frontend to consume the backend APIs.
-Pagination: Implement pagination for listing students, teachers, or classes.
-Detailed Role Management: Add more granular role-based access controls.
-Conclusion
-This backend system is a robust, scalable solution for managing a school’s data. It provides secure authentication, CRUD functionality, and a clear structure for further extensions.
+Request Body:
+{
+    "email": "admin@example.com",
+    "password": "securePassword123"
+}
+```
+
+#### Login
+```
+POST /admin/login
+Content-Type: application/json
+
+Request Body:
+{
+    "email": "admin@example.com",
+    "password": "securePassword123"
+}
+
+Response:
+{
+    "token": "jwt_token_here"
+}
+```
+
+### Students API
+
+#### Create Student
+```
+POST /students
+Content-Type: application/json
+Authorization: Bearer <token>
+
+Request Body:
+{
+    "name": "Ananya Sharma",      // Required: Student's full name
+    "email": "ananya.sharma@example.com",  // Required: Unique email
+    "classId": "60d7f4c4f1f5b2c6d4a0f1e5", // Required: Valid class ID
+    "profileImageUrl": "https://example.com/images/ananya-profile.jpg" // Optional
+}
+```
+
+#### Get All Students
+```
+GET /students
+Authorization: Bearer <token>
+```
+
+#### Get Student by ID
+```
+GET /students/:id
+Authorization: Bearer <token>
+```
+
+#### Update Student
+```
+PUT /students/:id
+Content-Type: application/json
+Authorization: Bearer <token>
+
+Request Body: 
+// Include any fields you want to update from the create student schema
+```
+
+#### Delete Student
+```
+DELETE /students/:id
+Authorization: Bearer <token>
+```
+
+### Teachers API
+
+#### Create Teacher
+```
+POST /teachers
+Content-Type: application/json
+Authorization: Bearer <token>
+
+Request Body:
+{
+    "name": "Ravi Kumar",         // Required: Teacher's full name
+    "email": "ravi.kumar@example.com",     // Required: Unique email
+    "subject": "Full Stack Web Development", // Required: Teaching subject
+    "profileImageUrl": "https://example.com/images/ravi-profile.jpg" // Optional
+}
+```
+
+#### Get All Teachers
+```
+GET /teachers
+Authorization: Bearer <token>
+```
+
+#### Get Teacher by ID
+```
+GET /teachers/:id
+Authorization: Bearer <token>
+```
+
+#### Update Teacher
+```
+PUT /teachers/:id
+Content-Type: application/json
+Authorization: Bearer <token>
+
+Request Body:
+// Include any fields you want to update from the create teacher schema
+```
+
+#### Delete Teacher
+```
+DELETE /teachers/:id
+Authorization: Bearer <token>
+```
+
+### Classes API
+
+#### Create Class
+```
+POST /classes
+Content-Type: application/json
+Authorization: Bearer <token>
+
+Request Body:
+{
+    "name": "Full Stack Web Development", // Required: Class name
+    "teacherId": "60d7f4c4f1f5b2c6d4a0f1e5" // Required: Valid teacher ID
+}
+```
+
+#### Get All Classes
+```
+GET /classes
+Authorization: Bearer <token>
+```
+
+#### Get Class by ID
+```
+GET /classes/:id
+Authorization: Bearer <token>
+```
+
+#### Update Class
+```
+PUT /classes/:id
+Content-Type: application/json
+Authorization: Bearer <token>
+
+Request Body:
+// Include any fields you want to update from the create class schema
+```
+
+#### Delete Class
+```
+DELETE /classes/:id
+Authorization: Bearer <token>
+```
+
+## Response Formats
+
+### Success Response
+```json
+{
+    "success": true,
+    "data": {
+        // Requested resource data
+    },
+    "message": "Operation successful"
+}
+```
+
+### Error Response
+```json
+{
+    "success": false,
+    "error": {
+        "code": "ERROR_CODE",
+        "message": "Error description"
+    }
+}
+```
+
+## Authentication
+
+- All API endpoints (except login and register) require JWT authentication
+- Include the JWT token in the Authorization header:
+  `Authorization: Bearer <your_token_here>`
+
+## Dependencies
+
+- express: ^4.17.1
+- mongoose: ^6.0.0
+- jsonwebtoken: ^8.5.1
+- bcryptjs: ^2.4.3
+- dotenv: ^10.0.0
+- cors: ^2.8.5
+
+## Future Enhancements
+
+- Image upload integration
+- Frontend development
+- Pagination implementation
+- Enhanced role management
